@@ -150,6 +150,10 @@
         .detail-section h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.18em; color: currentColor; margin-bottom: 0.75rem; font-weight: 600; }
         .detail-section p { font-size: 0.95rem; line-height: 1.8; color: var(--slate); }
 
+        .climate-grid { display: grid; grid-template-columns: repeat(2, auto); column-gap: 2rem; row-gap: 0.4rem; }
+
+
+        
         .dataset-info { background: var(--sand); padding: 0.85rem 1.15rem; border-left: 3px solid currentColor; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--charcoal); margin-top: 0.5rem; }
         .formula-display { background: var(--charcoal); color: var(--sand); padding: 1.25rem 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.9; margin-top: 0.75rem; white-space: pre-wrap; overflow-x: auto; }
 
@@ -721,18 +725,26 @@ Many study sites exceed WHO guidelines</div>
                             <div class="detail-section">
                                 <h4>Zone Codes</h4>
                                 <div class="formula-display">IPCC Climate Zone Mapping:
-  1: Tropical Montane          
-  2: Tropical Wet              
-  3: Tropical Moist         
-  4: Tropical Dry    
-  5: Warm Temperate Moist
-  6: Warm Temperate Dry 
-  7: Cool Temperate Moist
-  8: Cool Temperate Dry
-  9: Boreal Moist
- 10: Boreal Dry   
- 11: Polar Moist
- 12: Polar dry
+ <div class="climate-grid">
+  <div>1: Tropical Montane</div>
+  <div>5: Warm Temperate Moist</div>
+
+  <div>2: Tropical Wet</div>
+  <div>6: Warm Temperate Dry</div>
+
+  <div>3: Tropical Moist</div>
+  <div>7: Cool Temperate Moist</div>
+
+  <div>4: Tropical Dry</div>
+  <div>8: Cool Temperate Dry</div>
+
+  <div>9: Boreal Moist</div>
+  <div>10: Boreal Dry</div>
+
+  <div>11: Polar Moist</div>
+  <div>12: Polar Dry</div>
+</div>
+
                                 </div>
                             </div>
                             <div class="detail-section">
