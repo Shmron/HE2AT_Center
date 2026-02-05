@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Exposure Catalogue | HE2AT Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Heat-themed color palette */
+            --heat-red: #E63946;
+            --heat-orange: #F4A261;
+            --heat-amber: #E9C46A;
+            --heat-deep: #9D0208;
+            --teal-cool: #2A9D8F;
+            --teal-deep: #264653;
+            --sky-blue: #457B9D;
+            --slate: #3D5A73;
+            --charcoal: #1D3557;
+            --cream: #FFF8F0;
+            --ivory: #FDFCFA;
+            --sand: #F4E9D8;
+            --mist: #E8EEF2;
+            --gold: #D4AF37;
+            --forest: #2D5016;
+            --lavender: #7B6BA8;
+            --earth-brown: #8B4513;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Source Sans 3', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.7; font-weight: 400; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); opacity: 0.015; pointer-events: none; z-index: 0; }
+        .container { max-width: 1500px; margin: 0 auto; background: var(--ivory); position: relative; z-index: 1; box-shadow: 0 0 80px rgba(45, 52, 54, 0.08); }
+        .container::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, var(--heat-deep) 0%, var(--heat-red) 25%, var(--heat-orange) 50%, var(--heat-amber) 75%, var(--teal-cool) 100%); }
+
+        header { padding: 5rem 4rem 4rem; background: linear-gradient(180deg, var(--ivory) 0%, var(--sand) 100%); position: relative; overflow: hidden; }
+        header::after { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; border: 2px solid var(--heat-orange); border-radius: 50%; opacity: 0.08; }
+        header::before { content: ''; position: absolute; bottom: -150px; left: -100px; width: 300px; height: 300px; background: radial-gradient(circle, var(--heat-red) 0%, transparent 70%); opacity: 0.05; }
+
+        .header-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--heat-red); font-weight: 600; margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 1rem; }
+        .header-label::before { content: ''; display: inline-block; width: 40px; height: 2px; background: var(--heat-red); }
+        header h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; color: var(--charcoal); line-height: 1.1; margin-bottom: 1.5rem; max-width: 900px; letter-spacing: -0.02em; }
+        header h1 span { color: var(--heat-red); }
+        header h1 sup { font-size: 0.5em; vertical-align: super; }
+        .header-subtitle { font-size: 1.2rem; font-weight: 300; color: var(--slate); max-width: 750px; line-height: 1.8; }
+        .header-meta { display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid rgba(230, 57, 70, 0.2); }
+        .meta-item { display: flex; flex-direction: column; gap: 0.4rem; }
+        .meta-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--slate); }
+        .meta-value { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: var(--charcoal); }
+
+        main { padding: 4rem; }
+
+        /* Center Overview Box */
+        .center-overview { background: linear-gradient(135deg, var(--charcoal) 0%, var(--teal-deep) 100%); color: white; padding: 3rem; margin-bottom: 3rem; position: relative; overflow: hidden; }
+        .center-overview::before { content: ''; position: absolute; top: 0; right: 0; width: 300px; height: 300px; background: radial-gradient(circle, var(--heat-orange) 0%, transparent 70%); opacity: 0.1; }
+        .center-overview h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--heat-amber); }
+        .center-overview p { font-size: 1rem; line-height: 1.8; opacity: 0.9; max-width: 1000px; margin-bottom: 1rem; }
+        .center-highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .highlight-card { background: rgba(255,255,255,0.08); padding: 1.25rem; border-left: 3px solid var(--heat-orange); }
+        .highlight-card h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--heat-amber); margin-bottom: 0.5rem; }
+        .highlight-card p { font-size: 0.9rem; opacity: 0.85; line-height: 1.6; }
+
+        /* Data Pipeline Section */
+        .data-pipeline { background: var(--sand); border: 1px solid rgba(230, 57, 70, 0.2); padding: 2.5rem; margin-bottom: 3rem; }
+        .data-pipeline h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--charcoal); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+        .data-pipeline h3::before { content: ''; display: inline-block; width: 4px; height: 24px; background: var(--heat-red); }
+        .pipeline-intro { font-size: 0.95rem; color: var(--slate); margin-bottom: 2rem; line-height: 1.7; }
+        .pipeline-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .pipeline-step { background: white; padding: 1.5rem; border-left: 4px solid; position: relative; }
+        .pipeline-step.step-1 { border-color: var(--heat-red); }
+        .pipeline-step.step-2 { border-color: var(--heat-orange); }
+        .pipeline-step.step-3 { border-color: var(--teal-cool); }
+        .pipeline-step-number { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 800; opacity: 0.15; position: absolute; top: 0.5rem; right: 1rem; }
+        .pipeline-step h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+        .pipeline-step.step-1 h4 { color: var(--heat-red); }
+        .pipeline-step.step-2 h4 { color: var(--heat-orange); }
+        .pipeline-step.step-3 h4 { color: var(--teal-cool); }
+        .pipeline-step p { font-size: 0.9rem; color: var(--slate); line-height: 1.6; }
+
+        /* Category Sections */
+        .category-section { margin-bottom: 4rem; opacity: 0; transform: translateY(30px); animation: fadeSlideIn 0.7s ease forwards; }
+        @keyframes fadeSlideIn { to { opacity: 1; transform: translateY(0); } }
+        .category-section:nth-child(1) { animation-delay: 0.1s; }
+        .category-section:nth-child(2) { animation-delay: 0.15s; }
+        .category-section:nth-child(3) { animation-delay: 0.2s; }
+        .category-section:nth-child(4) { animation-delay: 0.25s; }
+        .category-section:nth-child(5) { animation-delay: 0.3s; }
+        .category-section:nth-child(6) { animation-delay: 0.35s; }
+        .category-section:nth-child(7) { animation-delay: 0.4s; }
+
+        .category-header { display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; cursor: pointer; padding: 1.75rem 2rem; background: var(--sand); border-left: 5px solid; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+        .category-header:hover { background: var(--ivory); box-shadow: 0 8px 30px rgba(45, 52, 54, 0.06); transform: translateX(8px); }
+        .category-number { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 800; line-height: 1; opacity: 0.15; min-width: 90px; }
+        .category-title-wrapper { flex: 1; }
+        .category-icon { font-size: 1.3rem; margin-bottom: 0.25rem; opacity: 0.8; }
+        .category-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: var(--charcoal); margin: 0; letter-spacing: -0.01em; }
+        .category-count { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--slate); margin-top: 0.35rem; letter-spacing: 0.08em; text-transform: uppercase; }
+        .toggle-indicator { font-size: 1.2rem; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); color: var(--slate); opacity: 0.5; }
+        .category-header.active .toggle-indicator { transform: rotate(180deg); }
+
+        /* Category colors */
+        .cat-temp { border-color: var(--heat-red); }
+        .cat-temp .category-number { color: var(--heat-red); }
+        .cat-air { border-color: var(--teal-deep); }
+        .cat-air .category-number { color: var(--teal-deep); }
+        .cat-soil { border-color: var(--earth-brown); }
+        .cat-soil .category-number { color: var(--earth-brown); }
+        .cat-urban { border-color: var(--lavender); }
+        .cat-urban .category-number { color: var(--lavender); }
+        .cat-climate { border-color: var(--sky-blue); }
+        .cat-climate .category-number { color: var(--sky-blue); }
+        .cat-pending { border-color: var(--gold); }
+        .cat-pending .category-number { color: var(--gold); }
+
+        .variables-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease; opacity: 0; }
+        .variables-grid.active { max-height: 25000px; opacity: 1; margin-bottom: 2rem; }
+
+        .variable-card { background: white; border: 1px solid rgba(45, 52, 54, 0.08); padding: 2rem; cursor: pointer; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+        .variable-card::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 100%; background: currentColor; opacity: 0.08; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .variable-card:hover { border-color: rgba(45, 52, 54, 0.15); box-shadow: 0 12px 40px rgba(45, 52, 54, 0.08); transform: translateY(-3px); }
+        .variable-card:hover::before { width: 4px; }
+
+        .cat-temp .variable-card { color: var(--heat-red); }
+        .cat-air .variable-card { color: var(--teal-deep); }
+        .cat-soil .variable-card { color: var(--earth-brown); }
+        .cat-urban .variable-card { color: var(--lavender); }
+        .cat-climate .variable-card { color: var(--sky-blue); }
+        .cat-pending .variable-card { color: var(--gold); }
+
+        .variable-name { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 600; color: var(--charcoal); margin-bottom: 0.4rem; line-height: 1.3; }
+        .variable-unit { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--slate); letter-spacing: 0.03em; margin-bottom: 1.25rem; }
+
+        .stats-display { background: var(--mist); padding: 1.25rem; margin-bottom: 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 2; color: var(--charcoal); }
+        .stats-display div { display: flex; justify-content: space-between; align-items: center; padding: 0.15rem 0; border-bottom: 1px solid rgba(45, 52, 54, 0.05); }
+        .stats-display div:last-child { border-bottom: none; }
+        .stats-label { color: var(--slate); font-weight: 400; }
+        .stats-value { font-weight: 600; color: var(--charcoal); }
+
+        .expand-btn { display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: currentColor; text-transform: uppercase; letter-spacing: 0.12em; border: none; background: none; cursor: pointer; padding: 0.6rem 0; transition: all 0.3s ease; font-weight: 500; }
+        .expand-btn:hover { opacity: 0.7; transform: translateX(4px); }
+        .expand-btn::after { content: '\2193'; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .variable-card.expanded .expand-btn::after { transform: rotate(180deg); }
+
+        .variable-details { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); margin-top: 1.5rem; }
+        .variable-card.expanded .variable-details { max-height: 3000px; }
+
+        .detail-section { margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 1px solid rgba(45, 52, 54, 0.08); }
+        .detail-section:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+        .detail-section h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.18em; color: currentColor; margin-bottom: 0.75rem; font-weight: 600; }
+        .detail-section p { font-size: 0.95rem; line-height: 1.8; color: var(--slate); }
+
+        .dataset-info { background: var(--sand); padding: 0.85rem 1.15rem; border-left: 3px solid currentColor; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--charcoal); margin-top: 0.5rem; }
+        .formula-display { background: var(--charcoal); color: var(--sand); padding: 1.25rem 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.9; margin-top: 0.75rem; white-space: pre-wrap; overflow-x: auto; }
+
+        /* Status badges */
+        .status-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.25rem 0.6rem; border-radius: 3px; display: inline-block; margin-bottom: 0.75rem; }
+        .status-complete { background: var(--teal-cool); color: white; }
+        .status-pending { background: var(--gold); color: var(--charcoal); }
+        .status-priority { background: var(--heat-red); color: white; }
+
+        /* References */
+        .references-section { margin-top: 5rem; padding: 4rem; background: var(--sand); border-top: 1px solid rgba(230, 57, 70, 0.2); }
+        .references-section h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--charcoal); margin-bottom: 2.5rem; }
+        .reference-item { font-size: 0.88rem; line-height: 1.8; color: var(--slate); margin-bottom: 1rem; padding-left: 2.5rem; position: relative; }
+        .reference-number { position: absolute; left: 0; font-weight: 600; color: var(--heat-red); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+
+        /* Funding Section */
+        .funding-section { background: linear-gradient(135deg, var(--teal-deep) 0%, var(--charcoal) 100%); color: white; padding: 3rem 4rem; }
+        .funding-section h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--heat-amber); margin-bottom: 1.5rem; }
+        .funding-section p { font-size: 0.95rem; line-height: 1.8; opacity: 0.9; max-width: 1000px; }
+        .funding-logos { display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; align-items: center; }
+        .funding-logo { background: rgba(255,255,255,0.1); padding: 1rem 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.05em; }
+
+        /* Footer */
+        footer { padding: 4rem; background: var(--charcoal); color: var(--sand); }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; }
+        .footer-section h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 1rem; color: var(--heat-amber); }
+        .footer-section p { font-size: 0.9rem; line-height: 1.7; opacity: 0.8; }
+        .footer-section a { color: var(--heat-amber); text-decoration: none; }
+        .footer-section a:hover { text-decoration: underline; }
+
+        @media (max-width: 900px) {
+            header { padding: 3rem 2rem; }
+            header h1 { font-size: 2.4rem; }
+            main { padding: 2rem; }
+            .category-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .category-number { font-size: 2.5rem; min-width: auto; }
+            .variables-grid { grid-template-columns: 1fr; }
+            .references-section, footer, .funding-section { padding: 3rem 2rem; }
+            .pipeline-steps { grid-template-columns: 1fr; }
+            .center-highlights { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-label">HE<sup>2</sup>AT Center Data Ecosystem</div>
+            <h1>Environmental <span>Exposure</span> Catalogue</h1>
+            <p class="header-subtitle">Comprehensive documentation of climate and environmental exposure variables for understanding heat-health impacts across Sub-Saharan Africa. This catalogue serves as both a technical reference for statisticians and a data inventory for the HE<sup>2</sup>AT Center research projects.</p>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Geographic Scope</div>
+                    <div class="meta-value">Sub-Saharan Africa</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Data Sources</div>
+                    <div class="meta-value">Cohorts & Trials</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Exposure Categories</div>
+                    <div class="meta-value">6 domains, 20+ variables</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Temporal Coverage</div>
+                    <div class="meta-value">2003-2024</div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Center Overview -->
+            <div class="center-overview">
+                <h2>The Heat and Health African Transdisciplinary Center</h2>
+                <p>The world's climate is changing rapidly, with global temperatures having risen more than 1°C since the industrial revolution. Heat waves and rising temperatures have major, though underappreciated, health implications, particularly for vulnerable populations in low-income settings.</p>
+                <p>The HE<sup>2</sup>AT Center is developing innovative data science solutions to mitigate the health impacts of climate change in Africa. We are systematically building a data ecosystem containing biomedical data integrated with weather, air quality, and other environmental data to understand the relationships between heat exposure and health outcomes.</p>
+                <div class="center-highlights">
+                    <div class="highlight-card">
+                        <h4>Individual Participant Data</h4>
+                        <p>Reusing data from cohorts and trials among pregnant women and neonates conducted across Sub-Saharan Africa since 2000, integrated into a harmonized platform.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Climate Integration</h4>
+                        <p>Environmental exposures linked to participant records through geolocation and temporal matching, enabling analysis of heat-health relationships.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Health Outcomes</h4>
+                        <p>Focus on maternal and child health including preterm birth, birth weight, pre-eclampsia, and heat-related morbidity in vulnerable populations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Pipeline -->
+            <div class="data-pipeline">
+                <h3>Exposure Assignment Methodology</h3>
+                <p class="pipeline-intro">Environmental exposures are assigned to study participants through systematic linkage of climate data to individual records. Each participant receives daily exposure values for their entire observation period, enabling analysis of exposure-outcome relationships at multiple temporal scales.</p>
+                <div class="pipeline-steps">
+                    <div class="pipeline-step step-1">
+                        <div class="pipeline-step-number">01</div>
+                        <h4>Patient Exposure Days</h4>
+                        <p>Generate individual-level exposure records containing Patient ID, location coordinates, and all exposure dates from pre-conception through post-delivery periods (90 days pre-conception + gestational period + 28 days post-delivery).</p>
+                    </div>
+                    <div class="pipeline-step step-2">
+                        <div class="pipeline-step-number">02</div>
+                        <h4>Climate Data Extraction</h4>
+                        <p>Extract environmental variables from multiple data sources (reanalysis products, satellite imagery, geospatial databases) for each unique location-date combination in the study.</p>
+                    </div>
+                    <div class="pipeline-step step-3">
+                        <div class="pipeline-step-number">03</div>
+                        <h4>Data Integration</h4>
+                        <p>Merge climate-enriched location data with patient records, producing complete exposure profiles for epidemiological analysis across trimester-specific and cumulative windows.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1. TEMPERATURE -->
+            <div class="category-section cat-temp">
+                <div class="category-header" onclick="toggleCategory(this)">
+                    <div class="category-number">01</div>
+                    <div class="category-title-wrapper">
+                        <div class="category-icon">&#127777;</div>
+                        <h2 class="category-title">Temperature Exposure</h2>
+                        <div class="category-count">3 indicators | Primary Research Focus</div>
+                    </div>
+                    <div class="toggle-indicator">&#9660;</div>
+                </div>
+                <div class="variables-grid">
+                    <!-- Mean Temperature -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">Mean Temperature</div>
+                        <div class="variable-unit">Near-Surface Air Temperature at 2m (°C)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">20.75 [19.83, 22.64] P95: 27.29</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">23.74 [21.91, 25.26] P95: 27.92</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">17.49 [13.66, 20.54] P95: 24.89</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">27.95 [26.77, 28.96] P95: 30.26</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">20.69 [19.41, 23.19] P95: 27.54</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">ECMWF CAMS EAC4 Global Reanalysis<br>Variable: tas (Near-surface air temperature)<br>Temporal resolution: 3-hourly<br>Original units: Kelvin (K), converted to Celsius</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Methodology</h4>
+                                <p>Daily mean temperature is calculated by averaging all 3-hourly observations at the nearest grid point to each participant's location. Values are converted from Kelvin to Celsius and extracted for each day in the participant's exposure window.</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Ambient temperature is a critical determinant of heat-related morbidity. Elevated mean temperatures during pregnancy have been associated with increased risk of preterm birth, low birth weight, and stillbirth. The relationship between heat exposure and adverse pregnancy outcomes shows both acute effects (during heatwaves) and chronic effects (sustained exposure to elevated temperatures).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Maximum Temperature -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">Maximum Temperature</div>
+                        <div class="variable-unit">Daily Maximum Air Temperature (°C)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">25.50 [24.11, 27.44] P95: 31.09</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">27.86 [26.20, 29.82] P95: 33.25</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">21.25 [17.30, 25.10] P95: 32.14</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">34.52 [32.67, 36.05] P95: 38.19</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">25.37 [23.52, 27.71] P95: 32.28</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">ECMWF CAMS EAC4 Global Reanalysis<br>Derived from 3-hourly tas values</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Methodology</h4>
+                                <p>Daily maximum is identified as the highest temperature value from the eight 3-hourly observations within each 24-hour period, then converted to Celsius.</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Peak daily temperatures capture acute heat stress events. Maximum temperatures exceeding physiological thresholds trigger thermoregulatory responses that can affect placental blood flow and fetal development. The P95 values indicate extreme heat events that may require targeted public health interventions.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Minimum Temperature -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">Minimum Temperature</div>
+                        <div class="variable-unit">Daily Minimum Air Temperature (°C)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">16.97 [16.15, 19.64] P95: 24.42</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">20.69 [18.03, 21.91] P95: 23.70</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">14.43 [10.66, 17.30] P95: 21.30</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">23.43 [20.94, 25.03] P95: 26.36</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">16.96 [15.74, 20.04] P95: 24.35</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">ECMWF CAMS EAC4 Global Reanalysis<br>Derived from 3-hourly tas values</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Methodology</h4>
+                                <p>Daily minimum is identified as the lowest temperature value from the eight 3-hourly observations within each 24-hour period, then converted to Celsius.</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Minimum temperatures provide insight into the lower bound of daily thermal exposure. Persistently elevated minimum temperatures (often referred to as "warm nights") indicate conditions where cooling relief may be limited, potentially compounding cumulative heat stress over multiple days.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. AIR QUALITY -->
+            <div class="category-section cat-air">
+                <div class="category-header" onclick="toggleCategory(this)">
+                    <div class="category-number">02</div>
+                    <div class="category-title-wrapper">
+                        <div class="category-icon">&#127811;</div>
+                        <h2 class="category-title">Air Quality & Atmospheric Conditions</h2>
+                        <div class="category-count">4 indicators</div>
+                    </div>
+                    <div class="toggle-indicator">&#9660;</div>
+                </div>
+                <div class="variables-grid">
+                    <!-- PM2.5 -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">PM2.5 (Fine Particulate Matter)</div>
+                        <div class="variable-unit">Particulate Matter &lt;2.5&mu;m (&mu;g/m&sup3;)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">54.77 [29.59, 71.89] P95: 89.45</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">14.20 [9.57, 23.15] P95: 58.58</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">13.74 [7.11, 28.64] P95: 77.77</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">46.76 [30.55, 72.98] P95: 137.57</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">38.83 [15.76, 67.07] P95: 88.74</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">ECMWF CAMS EAC4 Global Reanalysis<br>Variable: pm2p5 (Particulate matter d &lt; 2.5 &mu;m)<br>Original units: kg/m³, converted to &mu;g/m³ (×10⁹)</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Unit Conversion</h4>
+                                <div class="formula-display">PM2.5 (&mu;g/m³) = PM2.5 (kg/m³) × 10⁹
+
+WHO Air Quality Guideline (2021): 15 &mu;g/m³ (24-hour mean)
+Many study sites exceed WHO guidelines</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Fine particulate matter can penetrate deep into the lungs and cross the placental barrier, affecting fetal development. Exposure to PM2.5 during pregnancy has been associated with adverse outcomes including preterm birth, reduced birth weight, and gestational hypertension. African settings often experience elevated PM2.5 from vehicle emissions, biomass burning, and industrial sources.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NO2 -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">Nitrogen Dioxide (NO2)</div>
+                        <div class="variable-unit">Atmospheric Surface Concentration (ppb)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">5.91 [3.19, 7.36] P95: 9.07</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">0.89 [0.49, 1.66] P95: 5.14</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">2.86 [1.49, 5.65] P95: 11.33</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">1.72 [1.27, 2.34] P95: 4.00</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">4.38 [1.44, 7.05] P95: 9.31</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">ECMWF CAMS EAC4 Global Reanalysis<br>Variable: no2as (Nitrogen dioxide atmospheric surface)<br>Original units: kg/kg, converted to ppb</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Unit Conversion</h4>
+                                <div class="formula-display">NO2 (ppb) = NO2 (kg/kg) × (MW_air / MW_NO2) × 10⁹
+         = NO2 (kg/kg) × (29/46) × 10⁹
+         ≈ NO2 (kg/kg) × 0.63 × 10⁹</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>NO2 is a marker of traffic-related air pollution and combustion sources. Short-term exposure to elevated NO2 has been associated with increased risk of spontaneous abortion, particularly among older women and during cooler seasons. NO2 concentrations reflect vehicle density and industrial activity patterns.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Total AOD -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">Total Aerosol Optical Depth</div>
+                        <div class="variable-unit">AOD at 550nm (dimensionless)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">0.21 [0.13, 0.31] P95: 0.52</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">0.12 [0.08, 0.19] P95: 0.34</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">0.07 [0.04, 0.13] P95: 0.29</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">0.34 [0.22, 0.49] P95: 0.77</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">0.17 [0.10, 0.27] P95: 0.50</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">ECMWF CAMS EAC4 Global Reanalysis<br>Variable: aod550 (Aerosol Optical Depth at 550nm)</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Interpretation</h4>
+                                <div class="formula-display">AOD Interpretation:
+  &lt;0.1: Clean atmosphere
+  0.1-0.3: Moderate aerosol loading
+  0.3-0.5: High aerosol loading
+  &gt;0.5: Very high (dust storms, fires)</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>AOD is an integrated measure of atmospheric aerosol loading, including dust, smoke, and anthropogenic particles. Elevated AOD indicates poor air quality conditions and serves as a proxy for particulate matter exposure. The Gambia shows notably high AOD values likely due to Saharan dust transport.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Black Carbon AOD -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">Black Carbon Aerosol Optical Depth</div>
+                        <div class="variable-unit">BC AOD at 550nm (dimensionless)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">0.01 [0.00, 0.01] P95: 0.03</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">0.01 [0.00, 0.02] P95: 0.05</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">0.00 [0.00, 0.01] P95: 0.02</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">0.01 [0.01, 0.01] P95: 0.02</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">0.01 [0.00, 0.01] P95: 0.03</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">ECMWF CAMS EAC4 Global Reanalysis<br>Variable: od550bc (Black Carbon Optical Depth at 550nm)</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Black carbon is a component of fine particulate matter resulting from incomplete combustion of fossil fuels, biofuels, and biomass. It is a marker of combustion-related pollution and has been associated with cardiovascular and respiratory effects. In African settings, sources include vehicle emissions, cooking fires, and agricultural burning.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. TERRAIN & SOIL -->
+            <div class="category-section cat-soil">
+                <div class="category-header" onclick="toggleCategory(this)">
+                    <div class="category-number">03</div>
+                    <div class="category-title-wrapper">
+                        <div class="category-icon">&#127793;</div>
+                        <h2 class="category-title">Terrain & Soil Characteristics</h2>
+                        <div class="category-count">5 indicators (static)</div>
+                    </div>
+                    <div class="toggle-indicator">&#9660;</div>
+                </div>
+                <div class="variables-grid">
+                    <!-- Elevation -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">Elevation</div>
+                        <div class="variable-unit">Altitude Above Sea Level (meters)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">1294.21 [1232.18, 1528.07] P95: 1724.85</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">478.58 [478.58, 506.89] P95: 506.89</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">45.18 [45.18, 381.07] P95: 1407.88</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">15.31 [15.31, 31.68] P95: 31.68</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">1232.18 [199.62, 1414.50] P95: 1724.85</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">MERIT DEM v1.0.3 (Multi-Error-Removed Improved-Terrain DEM)<br>Google Earth Engine: MERIT/DEM/v1_0_3<br>Resolution: ~90m<br>Reference: EGM96 geoid model</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Methodology</h4>
+                                <p>Mean elevation calculated within each study location boundary using Google Earth Engine reduceRegion with mean reducer.</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Elevation influences atmospheric pressure, temperature patterns, and air quality. High-altitude environments have been associated with adverse reproductive outcomes including low birth weight and preterm birth due to reduced oxygen availability. Elevation also modifies the relationship between temperature and health outcomes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nitrogen -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">Soil Nitrogen (N)</div>
+                        <div class="variable-unit">Total Nitrogen (mg/kg)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">83.00 [75.00, 88.00] P95: 93.00</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">70.00 [61.00, 70.00] P95: 70.00</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">78.00 [77.00, 78.00] P95: 92.00</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">56.00 [55.00, 56.00] P95: 56.00</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">78.00 [73.00, 88.00] P95: 93.00</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">iSDAsoil Africa v1<br>Google Earth Engine: ISDASOIL/Africa/v1/nitrogen_total<br>Band: mean_0_20 (0-20cm depth)<br>Resolution: 30m</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Soil nitrogen is essential for plant protein synthesis and agricultural productivity. Low soil nitrogen contributes to food insecurity and maternal malnutrition, which in turn affects pregnancy outcomes. Soil quality indicators provide context for understanding local food systems and nutritional status.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phosphorus -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">Soil Phosphorus (P)</div>
+                        <div class="variable-unit">Extractable Phosphorus (mg/kg)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">27.00 [24.00, 30.00] P95: 33.00</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">27.00 [27.00, 29.00] P95: 29.00</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">26.00 [26.00, 26.00] P95: 28.00</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">24.00 [24.00, 24.00] P95: 24.00</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">26.00 [25.00, 28.00] P95: 32.00</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">iSDAsoil Africa v1<br>Google Earth Engine: ISDASOIL/Africa/v1/phosphorus_extractable<br>Band: mean_0_20 (0-20cm depth)</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Phosphorus is essential for root development and crop yield. Deficient soils produce lower crop yields affecting household food security and nutritional intake during pregnancy.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Potassium -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">Soil Potassium (K)</div>
+                        <div class="variable-unit">Extractable Potassium (mg/kg)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">53.00 [48.00, 56.00] P95: 59.00</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">51.00 [49.00, 51.00] P95: 51.00</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">46.00 [46.00, 47.00] P95: 54.00</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">41.00 [41.00, 42.00] P95: 42.00</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">50.00 [47.00, 54.00] P95: 59.00</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">iSDAsoil Africa v1<br>Google Earth Engine: ISDASOIL/Africa/v1/potassium_extractable<br>Band: mean_0_20 (0-20cm depth)</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Potassium regulates water uptake and disease resistance in plants, affecting agricultural productivity and food security.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calcium -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">Soil Calcium (Ca)</div>
+                        <div class="variable-unit">Extractable Calcium (mg/kg)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">71.00 [68.00, 75.00] P95: 75.00</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">70.00 [70.00, 71.00] P95: 71.00</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">64.00 [64.00, 69.00] P95: 79.00</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">64.00 [64.00, 65.00] P95: 65.00</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">70.00 [65.00, 73.00] P95: 75.00</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">iSDAsoil Africa v1<br>Google Earth Engine: ISDASOIL/Africa/v1/calcium_extractable<br>Band: mean_0_20 (0-20cm depth)</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Soil calcium affects food crop mineral content. Calcium is critical during pregnancy for fetal bone development, blood clotting, and muscle function. Maternal calcium deficiency has been associated with preeclampsia and low birth weight. Local soil calcium levels may influence dietary calcium availability.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. URBANIZATION -->
+            <div class="category-section cat-urban">
+                <div class="category-header" onclick="toggleCategory(this)">
+                    <div class="category-number">04</div>
+                    <div class="category-title-wrapper">
+                        <div class="category-icon">&#127961;</div>
+                        <h2 class="category-title">Urbanization & Built Environment</h2>
+                        <div class="category-count">1 indicator</div>
+                    </div>
+                    <div class="toggle-indicator">&#9660;</div>
+                </div>
+                <div class="variables-grid">
+                    <!-- GHSL -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">GHSL Urban Degree</div>
+                        <div class="variable-unit">Settlement Model Grid (SMOD code, unitless)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Kenya</span><span class="stats-value">23.00 [22.00, 30.00] P95: 30.00</span></div>
+                            <div><span class="stats-label">Malawi</span><span class="stats-value">12.00 [12.00, 21.00] P95: 21.00</span></div>
+                            <div><span class="stats-label">South Africa</span><span class="stats-value">30.00 [30.00, 30.00] P95: 30.00</span></div>
+                            <div><span class="stats-label">The Gambia</span><span class="stats-value">13.00 [13.00, 13.00] P95: 13.00</span></div>
+                            <div><span class="stats-label">All Sites</span><span class="stats-value">23.00 [21.00, 30.00] P95: 30.00</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">Global Human Settlement Layer (GHSL)<br>JRC/GHSL/P2023A/GHS_SMOD<br>Available years: 2000, 2005, 2010, 2015, 2020, 2025<br>Matched to exposure year</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Classification</h4>
+                                <div class="formula-display">SMOD Code Classification:
+  22-30: URBAN (Dense urban centres)
+  14-21: PERI-URBAN (Semi-dense areas)
+  11-13: RURAL (Low density settlements)</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Urbanization level influences exposure to environmental hazards including air pollution, urban heat islands, and noise. Urban environments during pregnancy may affect respiratory health and other developmental outcomes. The GHSL provides consistent classification across African settings for comparative analysis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. CLIMATE ZONES -->
+            <div class="category-section cat-climate">
+                <div class="category-header" onclick="toggleCategory(this)">
+                    <div class="category-number">05</div>
+                    <div class="category-title-wrapper">
+                        <div class="category-icon">&#127758;</div>
+                        <h2 class="category-title">Climate Classification</h2>
+                        <div class="category-count">1 indicator</div>
+                    </div>
+                    <div class="toggle-indicator">&#9660;</div>
+                </div>
+                <div class="variables-grid">
+                    <!-- IPCC Climate Zone -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-complete">Assigned</span>
+                        <div class="variable-name">IPCC Climate Zone</div>
+                        <div class="variable-unit">Climate Classification (categorical)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Tropical Dry</span><span class="stats-value">26.6%</span></div>
+                            <div><span class="stats-label">Tropical Moist</span><span class="stats-value">2.4%</span></div>
+                            <div><span class="stats-label">Tropical Montane</span><span class="stats-value">53.7%</span></div>
+                            <div><span class="stats-label">Warm Temperate Dry</span><span class="stats-value">17.3%</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Dataset</h4>
+                                <div class="dataset-info">IPCC Climate Zones Raster<br>Based on temperature and precipitation patterns<br>12 possible zones globally</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Zone Codes</h4>
+                                <div class="formula-display">IPCC Climate Zone Mapping:
+  1: Tropical Montane      5: Warm Temperate Moist
+  2: Tropical Wet          6: Warm Temperate Dry
+  3: Tropical Moist        7: Cool Temperate Moist
+  4: Tropical Dry          8: Cool Temperate Dry</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Site Distribution</h4>
+                                <div class="formula-display">Kenya: Tropical Dry (19.2%), Tropical Montane (80.8%)
+Malawi: Tropical Dry (73.1%), Tropical Moist (26.9%)
+South Africa: Tropical Dry (20.8%), Warm Temperate Dry (79.2%)
+The Gambia: Tropical Dry (100.0%)</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Climate zone classification provides context for interpreting temperature and air quality exposures. Different climate zones have distinct seasonal patterns, baseline temperatures, and humidity levels that modify the relationship between environmental exposures and health outcomes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. PENDING VARIABLES -->
+            <div class="category-section cat-pending">
+                <div class="category-header" onclick="toggleCategory(this)">
+                    <div class="category-number">06</div>
+                    <div class="category-title-wrapper">
+                        <div class="category-icon">&#9203;</div>
+                        <h2 class="category-title">Pending Exposure Variables</h2>
+                        <div class="category-count">8+ indicators awaiting assignment</div>
+                    </div>
+                    <div class="toggle-indicator">&#9660;</div>
+                </div>
+                <div class="variables-grid">
+                    <!-- NDVI -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-pending">Awaiting Assignment</span>
+                        <div class="variable-name">NDVI (Vegetation Index)</div>
+                        <div class="variable-unit">Normalized Difference Vegetation Index (-1 to 1)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Status</span><span class="stats-value">Data source identified</span></div>
+                            <div><span class="stats-label">Priority</span><span class="stats-value">High - Urban heat mitigation</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Planned Dataset</h4>
+                                <div class="dataset-info">MODIS MOD13Q1 (250m, 16-day)<br>Landsat Collection 2 (30m, 8-day composite)</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Residential greenness has been consistently associated with improved pregnancy outcomes. NDVI serves as a proxy for exposure to green spaces, which can mitigate urban heat island effects, reduce air pollution through vegetative filtering, and provide psychological benefits. Meta-analyses show associations between higher greenness exposure during pregnancy and reduced risk of preterm birth and low birth weight (Akaraci et al., 2020; Nieuwenhuijsen et al., 2017).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Precipitation -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-pending">Awaiting Assignment</span>
+                        <div class="variable-name">Precipitation</div>
+                        <div class="variable-unit">Daily/Monthly Rainfall (mm)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Status</span><span class="stats-value">Data source identified</span></div>
+                            <div><span class="stats-label">Priority</span><span class="stats-value">Medium - Seasonal patterns</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Planned Dataset</h4>
+                                <div class="dataset-info">ERA5 Reanalysis precipitation<br>CHIRPS (Climate Hazards Group)<br>PERSIANN-CDR</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Seasonal variations in precipitation have been associated with fluctuations in birth outcomes. Rainfall affects food availability, vector-borne disease transmission, and access to healthcare during wet seasons. Studies in Sub-Saharan Africa show associations between rainfall anomalies and adverse birth outcomes (Grace et al., 2015; Rylander et al., 2013).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Relative Humidity -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-pending">Awaiting Assignment</span>
+                        <div class="variable-name">Relative Humidity</div>
+                        <div class="variable-unit">Percentage (%)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Status</span><span class="stats-value">Data source identified</span></div>
+                            <div><span class="stats-label">Priority</span><span class="stats-value">High - Heat stress indices</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Planned Dataset</h4>
+                                <div class="dataset-info">ERA5-Land Hourly<br>Derived from temperature and dewpoint</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Relative humidity is essential for calculating heat stress indices. High humidity impairs the body's ability to cool through sweating, making humid heat more dangerous than dry heat at equivalent temperatures. Studies show humidity modifies temperature-mortality relationships (Wu et al., 2023; Gasparrini et al., 2015).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wet Bulb Temperature -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-pending">Awaiting Assignment</span>
+                        <div class="variable-name">Wet Bulb Temperature</div>
+                        <div class="variable-unit">Heat Stress Index (°C)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Status</span><span class="stats-value">To be calculated</span></div>
+                            <div><span class="stats-label">Priority</span><span class="stats-value">High - Physiological heat stress</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Planned Dataset</h4>
+                                <div class="dataset-info">Calculated from temperature and humidity<br>Source: ERA5 or MERRA-2 T2MWET</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Wet bulb temperature is a superior heat stress metric as it accounts for the body's inability to cool through sweating in humid conditions. Values above 32°C are dangerous for prolonged exposure; above 35°C is considered the theoretical human survivability limit. Pregnant women are especially vulnerable to heat stress due to increased metabolic demands (Kuehn & McCormick, 2017).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Heat Index -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-pending">Awaiting Assignment</span>
+                        <div class="variable-name">Heat Index</div>
+                        <div class="variable-unit">Apparent Temperature (°C)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Status</span><span class="stats-value">To be calculated</span></div>
+                            <div><span class="stats-label">Priority</span><span class="stats-value">High - Perceived heat</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Methodology</h4>
+                                <p>Calculated from air temperature and relative humidity using the Rothfusz regression equation (NOAA). Represents how hot it "feels" to the human body.</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Heat index is widely used in public health for heat warnings. Studies show heat index may be more predictive of heat-related mortality than temperature alone in humid climates (Anderson et al., 2013). Important for developing Early Warning Systems for vulnerable populations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Extreme Heat Days -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-pending">Awaiting Assignment</span>
+                        <div class="variable-name">Extreme Heat Days</div>
+                        <div class="variable-unit">Days exceeding threshold (%)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Status</span><span class="stats-value">To be calculated</span></div>
+                            <div><span class="stats-label">Priority</span><span class="stats-value">High - Acute heat exposure</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Methodology</h4>
+                                <p>Percentage of exposure days exceeding local 95th percentile temperature threshold. Captures acute extreme heat exposure during pregnancy.</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Extreme heat exposure during pregnancy affects fetal development through thermoregulatory stress and reduced placental blood flow. Studies show trimester-specific effects of extreme heat on preterm birth risk (Bekkar et al., 2020; Chersich et al., 2020).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Land Surface Temperature -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-pending">Awaiting Assignment</span>
+                        <div class="variable-name">Land Surface Temperature</div>
+                        <div class="variable-unit">Surface Temperature (°C)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Status</span><span class="stats-value">Data source identified</span></div>
+                            <div><span class="stats-label">Priority</span><span class="stats-value">Medium - Urban heat islands</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Planned Dataset</h4>
+                                <div class="dataset-info">MODIS LST (MOD11A1/MYD11A1)<br>Landsat thermal bands</div>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Land surface temperature captures the actual thermal environment at ground level, which can differ significantly from air temperature, especially in urban heat islands. LST is useful for identifying localized heat exposure in urban settings (Venter et al., 2020).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diurnal Temperature Range -->
+                    <div class="variable-card" onclick="toggleCard(this)">
+                        <span class="status-badge status-pending">Awaiting Assignment</span>
+                        <div class="variable-name">Diurnal Temperature Range</div>
+                        <div class="variable-unit">Daily Temperature Variation (°C)</div>
+                        <div class="stats-display">
+                            <div><span class="stats-label">Status</span><span class="stats-value">To be calculated</span></div>
+                            <div><span class="stats-label">Priority</span><span class="stats-value">Medium - Temperature variability</span></div>
+                        </div>
+                        <button class="expand-btn">View Details</button>
+                        <div class="variable-details">
+                            <div class="detail-section">
+                                <h4>Methodology</h4>
+                                <p>Calculated as daily maximum minus daily minimum temperature. Captures within-day temperature variability.</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>Health Relevance</h4>
+                                <p>Preconceptional and prenatal exposure to diurnal temperature variations (DTV) are associated with adverse pregnancy outcomes. Large day-night temperature swings may stress thermoregulatory systems (Zheng et al., 2021; Yin et al., 2019).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- REFERENCES -->
+        <div class="references-section">
+            <h2>Supporting Literature</h2>
+            <div class="reference-item"><span class="reference-number">1.</span> Chersich MF, et al. Associations between high temperatures in pregnancy and risk of preterm birth, low birth weight, and stillbirths: systematic review and meta-analysis. BMJ. 2020;371:m3811.</div>
+            <div class="reference-item"><span class="reference-number">2.</span> Bekkar B, et al. Association of Air Pollution and Heat Exposure With Preterm Birth, Low Birth Weight, and Stillbirth in the US: A Systematic Review. JAMA Netw Open. 2020;3(6):e208243.</div>
+            <div class="reference-item"><span class="reference-number">3.</span> Zhang Y, et al. Temperature exposure during pregnancy and birth outcomes: An updated systematic review of epidemiological evidence. Environ Pollut. 2017;225:700-712.</div>
+            <div class="reference-item"><span class="reference-number">4.</span> Li F, et al. Effects of PM2.5 exposure on perinatal complications: A systematic review and meta-analysis. BMC Pregnancy Childbirth. 2025;25(1):686.</div>
+            <div class="reference-item"><span class="reference-number">5.</span> Nieuwenhuijsen MJ, et al. Influence of the Urban Exposome on Birth Weight. Environ Health Perspect. 2019;127(4):47007.</div>
+            <div class="reference-item"><span class="reference-number">6.</span> Akaraci S, et al. Greenness and pregnancy outcomes: A systematic review and meta-analysis. Sci Total Environ. 2020;739:139952.</div>
+            <div class="reference-item"><span class="reference-number">7.</span> Liang Z, et al. Nitrogen dioxide exposure and spontaneous abortion risk: A systematic review and meta-analysis. Ecotoxicol Environ Saf. 2021;224:112633.</div>
+            <div class="reference-item"><span class="reference-number">8.</span> Wu Y, et al. Temperature and humidity effects on preterm birth: A systematic review. Front Public Health. 2023;11:1101283.</div>
+            <div class="reference-item"><span class="reference-number">9.</span> Gasparrini A, et al. Mortality risk attributable to high and low ambient temperature: a multicountry observational study. Lancet. 2015;386(9991):369-375.</div>
+            <div class="reference-item"><span class="reference-number">10.</span> Grace K, et al. Linking climate change and health outcomes: Examining the relationship between temperature, precipitation and birth weight in Africa. Glob Environ Change. 2015;35:125-137.</div>
+        </div>
+
+        <!-- Funding Acknowledgement -->
+        <div class="funding-section">
+            <h3>Funding Acknowledgement</h3>
+            <p>The research is supported by the Fogarty International Center, the National Institute of Environmental Health Sciences (NIEHS), the Data Science for Health Discovery and Innovation in Africa (DS-I Africa) and the Office of Strategic Coordination (OSC) of the National Institutes of Health under Award Number U54TW012083. The content is solely the responsibility of the authors and does not necessarily represent the official views of the National Institutes of Health.</p>
+            <div class="funding-logos">
+                <div class="funding-logo">NIH Fogarty International Center</div>
+                <div class="funding-logo">NIEHS</div>
+                <div class="funding-logo">DS-I Africa</div>
+                <div class="funding-logo">Award: U54TW012083</div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>HE<sup>2</sup>AT Center</h3>
+                    <p>Heat and Health African Transdisciplinary Center - Developing innovative data science solutions to mitigate the health impacts of climate change in Africa.</p>
+                    <p style="margin-top: 1rem;"><a href="https://heatcenter.wrhi.ac.za/">heatcenter.wrhi.ac.za</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact PIs</h3>
+                    <p><strong>Matthew Chersich</strong> - Contact PI<br>
+                    <strong>Stanley Luchters</strong> - MPI</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Data Sources</h3>
+                    <p>Climate: ECMWF CAMS, ERA5<br>
+                    Urbanization: GHSL (JRC)<br>
+                    Soil: iSDAsoil Africa<br>
+                    Terrain: MERIT DEM<br>
+                    Vegetation: MODIS, Landsat</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function toggleCategory(header) {
+            header.classList.toggle('active');
+            const grid = header.nextElementSibling;
+            grid.classList.toggle('active');
+        }
+
+        function toggleCard(card) {
+            event.stopPropagation();
+            card.classList.toggle('expanded');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const firstCategory = document.querySelector('.category-header');
+                if (firstCategory) {
+                    toggleCategory(firstCategory);
+                }
+            }, 400);
+        });
+
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.category-section').forEach(section => {
+            section.style.animationPlayState = 'paused';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
